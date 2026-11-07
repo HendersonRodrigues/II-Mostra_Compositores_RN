@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>II Mostra de Compositores do RN — Inscrições abertas</title>
+  <meta name="description" content="II Mostra de Compositores do RN — 25 a 27 de novembro de 2026. Laboratório de composição coletiva, minicursos e difusão de obras. Atividades híbridas e online. Inscreva-se." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="II Mostra de Compositores do RN" />
+  <meta property="og:description" content="25 a 27 de novembro de 2026. Laboratório de composição coletiva, minicursos e difusão de obras. Atividades híbridas e online." />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-family='Arial, sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%23ffffff'%3E%E2%99%AA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="content.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#topo" aria-label="Voltar ao início">
+        <span class="brand-mark" aria-hidden="true">♪</span>
+        <span class="brand-text">
+          <span data-field="brand.main">II Mostra de Compositores</span>
+          <small data-field="brand.sub">do RN · Universidade</small>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#programacao">Programação</a>
+        <a href="#local">Participar</a>
+        <a href="#faq">Dúvidas</a>
+      </nav>
+
+      <a class="btn btn-primary btn-sm" href="#inscricao">Inscrever-se</a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero" id="topo">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="badge">
+            <span class="badge-dot" aria-hidden="true"></span>
+            <span data-field="hero.badge">Inscrições abertas · 25 a 27 de novembro</span>
+          </p>
+
+          <h1>
+            <span data-field="hero.titleStart">II Mostra de</span>
+            <span class="grad" data-field="hero.titleHighlight">Compositores</span>
+            <span data-field="hero.titleEnd">do RN</span>
+          </h1>
+
+          <p class="lead" data-field="hero.lead">
+            Três dias dedicados à música autoral produzida no Rio Grande do Norte, com
+            laboratório de composição coletiva, minicursos e difusão das obras da mostra.
+            Atividades híbridas e online.
+          </p>
+
+          <ul class="hero-meta" aria-label="Informações do evento">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+              <span data-event="date">25 a 27 de novembro de 2026</span>
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span data-event="time">A partir das 16h</span> <span class="meta-sep">·</span> <span data-event="location-short">Híbrido/Online</span>
+            </li>
+          </ul>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#inscricao">
+              <span data-field="hero.ctaPrimary">Inscrever-se agora</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn-ghost" id="add-to-calendar" href="#" download="evento.ics">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M12 15v4M10 17h4"/></svg>
+              <span data-field="hero.ctaCalendar">Adicionar ao calendário</span>
+            </a>
+            <a class="btn btn-icon" id="share-whatsapp" href="#" target="_blank" rel="noopener" aria-label="Compartilhar no WhatsApp" title="Compartilhar no WhatsApp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+            </a>
+          </div>
+
+          <div class="countdown" id="countdown" aria-label="Contagem regressiva para o evento" hidden>
+            <div class="cd-item"><span class="cd-value" id="cd-days">00</span><span class="cd-label">dias</span></div>
+            <div class="cd-item"><span class="cd-value" id="cd-hours">00</span><span class="cd-label">horas</span></div>
+            <div class="cd-item"><span class="cd-value" id="cd-mins">00</span><span class="cd-label">min</span></div>
+            <div class="cd-item"><span class="cd-value" id="cd-secs">00</span><span class="cd-label">seg</span></div>
+          </div>
+          <p class="countdown-note" id="countdown-note" hidden></p>
+        </div>
+
+        <aside class="event-card" aria-label="Resumo do evento">
+          <p class="event-card-title" data-field="hero.cardTitle">Informações rápidas</p>
+          <dl class="event-details">
+            <div>
+              <dt>Data</dt>
+              <dd data-event="date">25 a 27 de novembro de 2026</dd>
+            </div>
+            <div>
+              <dt>Horário</dt>
+              <dd data-event="time">A partir das 16h</dd>
+            </div>
+            <div>
+              <dt>Local</dt>
+              <dd data-event="location">Híbrido — presencial e online</dd>
+            </div>
+            <div>
+              <dt>Público</dt>
+              <dd data-field="hero.cardAudience">Compositores, estudantes e público interessado</dd>
+            </div>
+            <div>
+              <dt>Formato</dt>
+              <dd data-field="hero.cardFormat">Híbrido e online</dd>
+            </div>
+          </dl>
+          <a class="btn btn-light" href="#inscricao" data-field="hero.cardButton">Garantir minha vaga</a>
+          <p class="event-card-note" data-field="hero.cardNote">Inscrições pelo formulário desta página.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="sobre">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-field="about.eyebrow">Sobre a mostra</p>
+          <h2 data-field="about.heading">Três dias de música e criação</h2>
+          <p class="section-lead" data-field="about.lead">
+            A II Mostra de Compositores do RN reúne compositores, estudantes e público
+            para compartilhar processos criativos, discutir tecnologia e difundir a
+            produção musical autoral do Rio Grande do Norte.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="M3 12l9 5 9-5"/><path d="M3 16l9 5 9-5"/></svg>
+            </span>
+            <h3 data-field="about.card1Title">Composição coletiva</h3>
+            <p data-field="about.card1Text">Laboratório de criação conjunta no primeiro dia, aberto a compositores iniciantes e experientes.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 3 9l9 5 9-5-9-5Z"/><path d="M7 11.5V16c0 1.5 2.2 3 5 3s5-1.5 5-3v-4.5"/></svg>
+            </span>
+            <h3 data-field="about.card2Title">Minicursos</h3>
+            <p data-field="about.card2Text">Tecnologias composicionais com Brenno, composição na academia com Tálio e composição na educação infantil com Alice.</p>
+          </article>
+
+          <article class="feature-card reveal">
+            <span class="feature-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l10-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg>
+            </span>
+            <h3 data-field="about.card3Title">Difusão das obras</h3>
+            <p data-field="about.card3Text">Apresentação e compartilhamento das obras produzidas na mostra, em todos os dias do evento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="programacao">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-field="schedule.eyebrow">Programação</p>
+          <h2 data-field="schedule.heading">Três dias de atividades</h2>
+          <p class="section-lead" data-field="schedule.lead">
+            O dia 25 tem formato híbrido, com atividades presenciais e online.
+            Nos dias 26 e 27, toda a programação é online.
+          </p>
+        </div>
+
+        <div class="schedule">
+          <article class="day-card reveal">
+            <header class="day-head">
+              <span class="day-pill" data-field="schedule.day1.label">Quarta-feira · 25/11</span>
+              <h3 data-field="schedule.day1.title">Criação e difusão</h3>
+            </header>
+            <ul class="session-list">
+              <li class="session">
+                <span class="session-time" data-field="schedule.day1.session1.time">16h — 17h</span>
+                <h4 data-field="schedule.day1.session1.title">Laboratório de composição coletiva</h4>
+                <span class="format-tag format-hybrid" data-field="schedule.day1.session1.format">Híbrido</span>
+              </li>
+              <li class="session">
+                <span class="session-time" data-field="schedule.day1.session2.time">17h — 18h</span>
+                <h4 data-field="schedule.day1.session2.title">Difusão das obras da Mostra</h4>
+                <span class="format-tag format-hybrid" data-field="schedule.day1.session2.format">Híbrido</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="day-card reveal">
+            <header class="day-head">
+              <span class="day-pill" data-field="schedule.day2.label">Quinta-feira · 26/11</span>
+              <h3 data-field="schedule.day2.title">Minicursos e difusão</h3>
+            </header>
+            <ul class="session-list">
+              <li class="session">
+                <span class="session-time" data-field="schedule.day2.session1.time">16h — 16h45</span>
+                <h4 data-field="schedule.day2.session1.title">Minicursos</h4>
+                <ul class="session-details" data-field="schedule.day2.session1.details" data-field-lines>
+                  <li>Tecnologias composicionais — Brenno</li>
+                  <li>Composição na academia — Tálio</li>
+                  <li>Composição na Educação Infantil — Alice</li>
+                </ul>
+                <span class="format-tag format-online" data-field="schedule.day2.session1.format">Online</span>
+              </li>
+              <li class="session">
+                <span class="session-time" data-field="schedule.day2.session2.time">17h — 18h30</span>
+                <h4 data-field="schedule.day2.session2.title">Difusão das obras da Mostra</h4>
+                <span class="format-tag format-online" data-field="schedule.day2.session2.format">Online</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="day-card reveal">
+            <header class="day-head">
+              <span class="day-pill" data-field="schedule.day3.label">Sexta-feira · 27/11</span>
+              <h3 data-field="schedule.day3.title">Difusão e encerramento</h3>
+            </header>
+            <ul class="session-list">
+              <li class="session">
+                <span class="session-time" data-field="schedule.day3.session1.time">17h — 18h</span>
+                <h4 data-field="schedule.day3.session1.title">Difusão das obras da Mostra</h4>
+                <span class="format-tag format-online" data-field="schedule.day3.session1.format">Online</span>
+              </li>
+              <li class="session">
+                <span class="session-time" data-field="schedule.day3.session2.time">18h — 18h30</span>
+                <h4 data-field="schedule.day3.session2.title">Encerramento com mini palestra</h4>
+                <span class="format-tag format-online" data-field="schedule.day3.session2.format">Online</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="local">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-field="location.eyebrow">Formato</p>
+          <h2 data-field="location.heading">Onde e como participar</h2>
+        </div>
+
+        <div class="location-grid">
+          <div class="location-card reveal">
+            <h3 data-event="location">Híbrido — presencial e online</h3>
+            <p data-field="location.cardText">
+              No dia 25, as atividades acontecem de forma híbrida: presencialmente e com
+              transmissão online. Nos dias 26 e 27, toda a programação é online.
+            </p>
+            <a class="btn btn-primary" data-event="email-link" href="mailto:hendersonrodrigues@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+              <span data-field="location.cardButton">Falar com a organização</span>
+            </a>
+          </div>
+
+          <div class="location-tips reveal">
+            <h3 data-field="location.tipsHeading">Como participar</h3>
+            <ul class="check-list">
+              <li data-field="location.tip1">Faça sua inscrição pelo formulário desta página.</li>
+              <li data-field="location.tip2">O link de acesso às atividades online será enviado por e-mail.</li>
+              <li data-field="location.tip3">O endereço do espaço presencial também será informado aos inscritos.</li>
+              <li data-field="location.tip4">Dúvidas podem ser enviadas para o e-mail da organização.</li>
+            </ul>
+            <p class="muted" data-field="location.note">A programação pode sofrer pequenos ajustes até a data do evento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section signup" id="inscricao">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-field="signup.eyebrow">Inscrição</p>
+          <h2 data-field="signup.heading">Garanta sua vaga</h2>
+          <p class="section-lead" data-field="signup.lead">
+            Preencha o formulário abaixo. A confirmação da sua inscrição e as
+            informações de acesso serão enviadas por e-mail.
+          </p>
+        </div>
+
+        <div class="form-card reveal">
+          <div id="form-placeholder" class="form-placeholder">
+            <p class="form-placeholder-title" data-field="signup.placeholderTitle">O formulário de inscrição será disponibilizado em breve.</p>
+            <p><span data-field="signup.placeholderText">Enquanto isso, você pode entrar em contato pelo e-mail</span> <a data-event="email-link" href="mailto:hendersonrodrigues@gmail.com"><span data-event="email">hendersonrodrigues@gmail.com</span></a>.</p>
+          </div>
+          <iframe
+            id="form-iframe"
+            title="Formulário de inscrição na II Mostra de Compositores do RN"
+            src="about:blank"
+            loading="lazy"
+            hidden
+          ></iframe>
+          <p class="form-note" data-field="signup.note">
+            Ao se inscrever, você autoriza o uso dos seus dados exclusivamente para a
+            organização deste evento.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <p class="eyebrow" data-field="faq.eyebrow">Dúvidas frequentes</p>
+          <h2 data-field="faq.heading">Perguntas e respostas</h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <details>
+            <summary>
+              <span data-field="faq.q1">Preciso ter experiência em composição?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p data-field="faq.a1">Não. As atividades são abertas tanto a pessoas iniciantes quanto a compositores com experiência.</p>
+          </details>
+          <details>
+            <summary>
+              <span data-field="faq.q2">Como acesso as atividades online?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p data-field="faq.a2">Após a inscrição, o link de acesso será enviado ao e-mail informado no formulário.</p>
+          </details>
+          <details>
+            <summary>
+              <span data-field="faq.q3">Onde acontece a parte presencial?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p data-field="faq.a3">O endereço do espaço presencial será informado aos inscritos por e-mail antes do evento.</p>
+          </details>
+          <details>
+            <summary>
+              <span data-field="faq.q4">Posso participar de apenas um dia?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <p data-field="faq.a4">Sim. Você pode acompanhar as atividades de interesse, respeitando os horários de cada dia da programação.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#topo" aria-label="Voltar ao início">
+          <span class="brand-mark" aria-hidden="true">♪</span>
+          <span class="brand-text">
+            <span data-field="brand.main">II Mostra de Compositores</span>
+            <small data-field="brand.sub">do RN · Universidade</small>
+          </span>
+        </a>
+        <p class="footer-text" data-field="footer.text">
+          Evento dedicado à música autoral produzida no Rio Grande do Norte.
+          Dúvidas? Fale com a organização.
+        </p>
+        <a class="footer-mail" data-event="email-link" href="mailto:hendersonrodrigues@gmail.com">
+          <span data-event="email">hendersonrodrigues@gmail.com</span>
+        </a>
+      </div>
+
+      <div class="footer-share">
+        <p class="footer-title" data-field="footer.shareTitle">Compartilhe o evento</p>
+        <div class="footer-actions">
+          <a class="btn btn-ghost btn-sm" id="share-whatsapp-footer" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+            <span data-field="footer.whatsapp">WhatsApp</span>
+          </a>
+          <button class="btn btn-ghost btn-sm" id="copy-link" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            <span data-field="footer.copy">Copiar link</span>
+          </button>
+        </div>
+        <p class="copy-feedback" id="copy-feedback" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> <span data-event="event-name">II Mostra de Compositores do RN</span></p>
+      <nav aria-label="Links do rodapé">
+        <a href="#sobre">Sobre</a>
+        <a href="#programacao">Programação</a>
+        <a href="#inscricao">Inscrição</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
