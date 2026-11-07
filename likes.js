@@ -1,53 +1,58 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  doc,
-  documentId,
-  getDocs,
-  query,
-  runTransaction,
-  where
-} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+(function () {
+  const BASE_URL = "https://abacus.jasoncameron.dev";
 
-const COLLECTION_NAME = "curtidas";
-const MAX_QUERY_SIZE = 30;
+  function sanitizeNamespace(value) {
+    return String(value || "")
+      .trim()
+      .replace(/[^A-Za-z0-9_.-]/g, "-")
+      .slice(0, 64);
+  }
 
-export function createLikesClient(firebaseConfig) {
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+  window.createAbacusLikesClient = function (namespace) {
+    const safeNamespace = sanitizeNamespace(namespace) || "uern-ii-mostra-compositores-rn";
+    const keyFor = (videoId) => `video-${videoId}`;
+    const endpoint = (action, videoId) =>
+      `${BASE_URL}/${action}/${encodeURIComponent(safeNamespace)}/${encodeURIComponent(keyFor(videoId))}`;
 
-  async function fetchCounts(videoIds) {
-    const ids = [...new Set(videoIds.filter(Boolean))];
-    const counts = {};
-    if (!ids.length) return counts;
-
-    for (let index = 0; index < ids.length; index += MAX_QUERY_SIZE) {
-      const chunk = ids.slice(index, index + MAX_QUERY_SIZE);
-      const likesQuery = query(collection(db, COLLECTION_NAME), where(documentId(), "in", chunk));
-      const snapshot = await getDocs(likesQuery);
-      snapshot.forEach((likeDoc) => {
-        counts[likeDoc.id] = Number(likeDoc.data().count) || 0;
-      });
+    async function getCount(videoId) {
+      const response = await fetch(endpoint("get", videoId), { cache: "no-store" });
+      if (response.status === 404) return 0;
+      if (!response.ok) throw new Error("Não foi possível obter as curtidas.");
+      const data = await response.json();
+      return Number(data.value) || 0;
     }
 
-    return counts;
-  }
+    async function fetchCounts(videoIds) {
+      const uniqueIds = [...new Set((videoIds || []).filter(Boolean))];
+      const counts = {};
+      let failures = 0;
 
-  async function setLike(videoId, delta) {
-    const likeRef = doc(db, COLLECTION_NAME, videoId);
+      for (const videoId of uniqueIds) {
+        try {
+          counts[videoId] = await getCount(videoId);
+        } catch (error) {
+          failures += 1;
+        }
+      }
 
-    return runTransaction(db, async (transaction) => {
-      const snapshot = await transaction.get(likeRef);
-      const current = snapshot.exists() ? Number(snapshot.data().count) || 0 : 0;
-      const next = Math.max(0, current + delta);
+      if (uniqueIds.length && failures === uniqueIds.length) {
+        throw new Error("Curtidas indisponíveis no momento.");
+      }
 
-      if (next === current) return next;
+      uniqueIds.forEach((videoId) => {
+        if (!(videoId in counts)) counts[videoId] = 0;
+      });
 
-      transaction.set(likeRef, { count: next }, { merge: true });
-      return next;
-    });
-  }
+      return counts;
+    }
 
-  return { fetchCounts, setLike };
-}
+    async function like(videoId) {
+      const response = await fetch(endpoint("hit", videoId), { cache: "no-store" });
+      if (!response.ok) throw new Error("Não foi possível registrar a curtida.");
+      const data = await response.json();
+      return Number(data.value) || 0;
+    }
+
+    return { fetchCounts, like, namespace: safeNamespace };
+  };
+})();

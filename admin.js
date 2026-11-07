@@ -11,10 +11,7 @@ const CONFIG_FIELDS = [
   { path: "contactPhone", label: "Telefone / WhatsApp", hint: "Com DDD. Ex.: (84) 9 8847 2021" },
   { path: "formUrl", label: "URL do Google Forms", hint: "Cole a URL de incorporação. Vazio exibe o aviso de formulário em breve.", type: "url" },
   { path: "shareText", label: "Texto de compartilhamento (WhatsApp)", type: "textarea" },
-  { path: "firebaseApiKey", label: "Firebase — API key", hint: "Configuração do app Web usada pelas curtidas dos vídeos." },
-  { path: "firebaseAuthDomain", label: "Firebase — Auth domain" },
-  { path: "firebaseProjectId", label: "Firebase — Project ID" },
-  { path: "firebaseAppId", label: "Firebase — App ID", hint: "Sem API key, Project ID e App ID, as curtidas ficam desativadas." }
+  { path: "likesNamespace", label: "Namespace das curtidas (Abacus)", hint: "Use letras, números, hífen, ponto ou sublinhado. Troque se quiser começar a contagem do zero." }
 ];
 
 const CONTENT_GROUPS = [

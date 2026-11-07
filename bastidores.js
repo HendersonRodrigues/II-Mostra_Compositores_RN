@@ -9,7 +9,13 @@
     youtubeId
   } = window.Site;
 
-  const LIKED_KEY = "eventSiteLikedVideos";
+  const namespace =
+    String(CONFIG.likesNamespace || "")
+      .trim()
+      .replace(/[^A-Za-z0-9_.-]/g, "-")
+      .slice(0, 64) || "uern-ii-mostra-compositores-rn";
+  const LIKED_KEY = `eventSiteLikedVideos:${namespace}`;
+  const COUNTS_KEY = `eventSiteLikeCounts:${namespace}`;
   const countFormatter = new Intl.NumberFormat("pt-BR");
   const likeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
   const playIcon = '<span class="video-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7-11-7Z"/></svg></span>';
@@ -24,6 +30,30 @@
 
   if (!list || !empty) return;
 
+  function readLiked() {
+    try {
+      const raw = localStorage.getItem(LIKED_KEY);
+      if (!raw) return {};
+      const data = JSON.parse(raw);
+      return data && typeof data === "object" ? data : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function readCountsCache() {
+    try {
+      const raw = localStorage.getItem(COUNTS_KEY);
+      if (!raw) return {};
+      const data = JSON.parse(raw);
+      return data && typeof data === "object" ? data : {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  const cachedCounts = readCountsCache();
+
   const items = (Array.isArray(RAW_VIDEOS) ? RAW_VIDEOS : [])
     .map((video) => ({
       id: youtubeId(video.url),
@@ -35,7 +65,7 @@
     .map((video) => ({
       ...video,
       title: video.title || "Vídeo da II Mostra",
-      count: 0,
+      count: Number(cachedCounts[video.id]) || 0,
       busy: false
     }));
 
@@ -62,27 +92,27 @@
     note.classList.remove("is-error");
   }
 
-  function readLiked() {
-    try {
-      const raw = localStorage.getItem(LIKED_KEY);
-      if (!raw) return {};
-      const data = JSON.parse(raw);
-      return data && typeof data === "object" ? data : {};
-    } catch (error) {
-      return {};
-    }
-  }
-
   function isLiked(id) {
     return Boolean(readLiked()[id]);
   }
 
-  function setLikedState(id, liked) {
+  function markLiked(id) {
     const map = readLiked();
-    if (liked) map[id] = 1;
-    else delete map[id];
+    map[id] = 1;
     try {
       localStorage.setItem(LIKED_KEY, JSON.stringify(map));
+    } catch (error) {
+      return;
+    }
+  }
+
+  function cacheCounts(counts) {
+    const cache = readCountsCache();
+    Object.entries(counts || {}).forEach(([id, count]) => {
+      cache[id] = Number(count) || 0;
+    });
+    try {
+      localStorage.setItem(COUNTS_KEY, JSON.stringify(cache));
     } catch (error) {
       return;
     }
@@ -95,8 +125,9 @@
     item.likeBtn.setAttribute("aria-pressed", String(liked));
     item.likeBtn.setAttribute(
       "aria-label",
-      liked ? `Remover curtida do vídeo: ${item.title}` : `Curtir vídeo: ${item.title}`
+      liked ? `Você curtiu o vídeo: ${item.title}` : `Curtir vídeo: ${item.title}`
     );
+    item.likeBtn.disabled = !client || liked || item.busy;
   }
 
   function showPlayer(item) {
@@ -174,7 +205,7 @@
     likeButton.setAttribute("aria-pressed", "false");
     likeButton.setAttribute("aria-label", `Curtir vídeo: ${item.title}`);
     likeButton.innerHTML = `${likeIcon}<span class="like-count">0</span>`;
-    likeButton.addEventListener("click", () => toggleLike(item));
+    likeButton.addEventListener("click", () => likeVideo(item));
 
     item.likeBtn = likeButton;
     item.countEl = likeButton.querySelector(".like-count");
@@ -187,30 +218,25 @@
     return card;
   }
 
-  async function toggleLike(item) {
-    if (!client || item.busy) return;
+  async function likeVideo(item) {
+    if (!client || item.busy || isLiked(item.id)) return;
 
-    const likedBefore = isLiked(item.id);
     const countBefore = item.count;
-    const delta = likedBefore ? -1 : 1;
-
     item.busy = true;
-    item.likeBtn.disabled = true;
-    item.count = Math.max(0, countBefore + delta);
+    item.count = countBefore + 1;
     updateLikeUI(item);
 
     try {
-      const nextCount = await client.setLike(item.id, delta);
-      item.count = nextCount;
-      setLikedState(item.id, !likedBefore);
+      const serverCount = await client.like(item.id);
+      item.count = serverCount;
+      markLiked(item.id);
+      cacheCounts({ [item.id]: serverCount });
       hideNote();
     } catch (error) {
       item.count = countBefore;
-      setLikedState(item.id, likedBefore);
       showNote("Não foi possível registrar sua curtida. Tente novamente.", true, true);
     } finally {
       item.busy = false;
-      item.likeBtn.disabled = false;
       updateLikeUI(item);
     }
   }
@@ -220,19 +246,14 @@
     try {
       const counts = await client.fetchCounts(items.map((item) => item.id));
       items.forEach((item) => {
-        item.count = Number(counts[item.id]) || 0;
+        if (!(item.id in counts)) return;
+        item.count = counts[item.id];
         updateLikeUI(item);
       });
+      cacheCounts(counts);
     } catch (error) {
       showNote("Não foi possível atualizar as curtidas agora.", true, true);
     }
-  }
-
-  function enableLikes() {
-    items.forEach((item) => {
-      item.likeBtn.disabled = false;
-      updateLikeUI(item);
-    });
   }
 
   async function initLikes() {
@@ -241,30 +262,27 @@
       return;
     }
 
-    const firebaseConfig = {
-      apiKey: CONFIG.firebaseApiKey,
-      authDomain: CONFIG.firebaseAuthDomain,
-      projectId: CONFIG.firebaseProjectId,
-      appId: CONFIG.firebaseAppId
-    };
-
-    if (!firebaseConfig.apiKey || !firebaseConfig.projectId || !firebaseConfig.appId) {
-      showNote("As curtidas estarão disponíveis em breve.");
+    const factory = window.createAbacusLikesClient;
+    if (typeof factory !== "function") {
+      showNote("Curtidas indisponíveis no momento.");
       return;
     }
 
     try {
-      const likesModule = await import("./likes.js");
-      client = likesModule.createLikesClient(firebaseConfig);
+      client = factory(namespace);
       const counts = await client.fetchCounts(items.map((item) => item.id));
       items.forEach((item) => {
-        item.count = Number(counts[item.id]) || 0;
+        if (!(item.id in counts)) return;
+        item.count = counts[item.id];
+        updateLikeUI(item);
       });
-      enableLikes();
+      cacheCounts(counts);
+      items.forEach(updateLikeUI);
       hideNote();
     } catch (error) {
       client = null;
       showNote("Curtidas indisponíveis no momento.");
+      items.forEach(updateLikeUI);
       return;
     }
 

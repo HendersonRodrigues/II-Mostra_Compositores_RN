@@ -220,6 +220,11 @@
   transform: none;
 }
 
+.like-button[aria-pressed="true"]:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
 .like-button:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 2px;

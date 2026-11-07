@@ -10,10 +10,7 @@ window.EVENT_SITE = {
     "contactPhone": "(84) 9 8847 2021",
     "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeiPPhEB4Fra8hBo8ovTNi5mmfDM2DyTaR-FAwsXhkbzr1OkA/viewform",
     "shareText": "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026.",
-    "firebaseApiKey": "",
-    "firebaseAuthDomain": "",
-    "firebaseProjectId": "",
-    "firebaseAppId": ""
+    "likesNamespace": "uern-ii-mostra-compositores-rn"
   },
   "content": {
     "seo.description": "II Mostra de Compositores do RN — 25 a 27 de novembro de 2026. Laboratório de composição coletiva, minicursos e difusão de obras. Atividades híbridas e online na UERN. Inscreva-se.",
