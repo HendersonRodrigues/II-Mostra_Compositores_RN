@@ -7,7 +7,7 @@ window.EVENT_SITE = {
     "location": "Híbrido — presencial e online",
     "locationShort": "Híbrido/Online",
     "contactEmail": "hendersonrodrigues@gmail.com",
-    "formUrl": "",
+    "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeiPPhEB4Fra8hBo8ovTNi5mmfDM2DyTaR-FAwsXhkbzr1OkA/viewform",
     "shareText": "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026."
   },
   "content": {
