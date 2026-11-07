@@ -8,6 +8,7 @@ const CONFIG_FIELDS = [
   { path: "location", label: "Local (resumo do evento e seção Formato)" },
   { path: "locationShort", label: "Local curto (topo e resumo)" },
   { path: "contactEmail", label: "E-mail de contato", type: "email" },
+  { path: "contactPhone", label: "Telefone / WhatsApp", hint: "Com DDD. Ex.: (84) 9 8847 2021" },
   { path: "formUrl", label: "URL do Google Forms", hint: "Cole a URL de incorporação. Vazio exibe o aviso de formulário em breve.", type: "url" },
   { path: "shareText", label: "Texto de compartilhamento (WhatsApp)", type: "textarea" }
 ];
@@ -150,6 +151,7 @@ const CONTENT_GROUPS = [
     title: "Rodapé",
     fields: [
       { path: "footer.text", label: "Texto do rodapé", type: "textarea" },
+      { path: "footer.credit", label: "Crédito de organização", type: "textarea" },
       { path: "footer.shareTitle", label: "Título de compartilhamento" },
       { path: "footer.whatsapp", label: "Botão WhatsApp" },
       { path: "footer.copy", label: "Botão copiar link" }

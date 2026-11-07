@@ -3,9 +3,10 @@ const DEFAULT_CONFIG = {
   startISO: "2026-11-25T16:00:00-03:00",
   endISO: "2026-11-27T18:30:00-03:00",
   timeZone: "America/Sao_Paulo",
-  location: "Híbrido — presencial e online",
-  locationShort: "Híbrido/Online",
-  contactEmail: "hendersonrodrigues@gmail.com",
+  location: "Auditório do Curso de Música, FALA (Sede 2) — Campus Central da UERN, Mossoró",
+  locationShort: "Híbrido · UERN",
+  contactEmail: "hendersonrodrigues@uern.br",
+  contactPhone: "(84) 9 8847 2021",
   formUrl: "",
   shareText: "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026."
 };
@@ -146,6 +147,7 @@ function applyConfig() {
     location: CONFIG.location,
     "location-short": CONFIG.locationShort,
     email: CONFIG.contactEmail,
+    phone: CONFIG.contactPhone,
     "event-name": eventName
   };
 
@@ -156,6 +158,12 @@ function applyConfig() {
 
   $$('[data-event="email-link"]').forEach((link) => {
     link.setAttribute("href", `mailto:${CONFIG.contactEmail}`);
+  });
+
+  const phoneDigits = String(CONFIG.contactPhone || "").replace(/\D/g, "");
+  const whatsappNumber = phoneDigits.length >= 10 && phoneDigits.length <= 11 ? `55${phoneDigits}` : phoneDigits;
+  $$('[data-event="phone-link"]').forEach((link) => {
+    if (whatsappNumber) link.setAttribute("href", `https://wa.me/${whatsappNumber}`);
   });
 
   document.title = `${eventName} — Inscrições abertas`;
