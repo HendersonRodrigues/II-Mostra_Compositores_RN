@@ -9,7 +9,11 @@ window.EVENT_SITE = {
     "contactEmail": "hendersonrodrigues@uern.br",
     "contactPhone": "(84) 9 8847 2021",
     "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeiPPhEB4Fra8hBo8ovTNi5mmfDM2DyTaR-FAwsXhkbzr1OkA/viewform",
-    "shareText": "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026."
+    "shareText": "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026.",
+    "firebaseApiKey": "",
+    "firebaseAuthDomain": "",
+    "firebaseProjectId": "",
+    "firebaseAppId": ""
   },
   "content": {
     "seo.description": "II Mostra de Compositores do RN — 25 a 27 de novembro de 2026. Laboratório de composição coletiva, minicursos e difusão de obras. Atividades híbridas e online na UERN. Inscreva-se.",
@@ -94,6 +98,13 @@ window.EVENT_SITE = {
     "footer.credit": "Proposta e organização: Professor Dr. Henderson Rodrigues — UERN.",
     "footer.shareTitle": "Compartilhe o evento",
     "footer.whatsapp": "WhatsApp",
-    "footer.copy": "Copiar link"
-  }
+    "footer.copy": "Copiar link",
+    "bastidores.eyebrow": "Bastidores",
+    "bastidores.heading": "Bastidores da II Mostra",
+    "bastidores.lead": "Entrevistas com participantes, compositores e convidados para entrar no clima do evento. Novos vídeos serão publicados aos poucos até a mostra.",
+    "bastidores.emptyTitle": "Os primeiros vídeos estão a caminho",
+    "bastidores.emptyText": "Em breve, entrevistas com quem faz a II Mostra acontecer. Acompanhe por aqui.",
+    "bastidores.seoDescription": "Entrevistas e bastidores da II Mostra de Compositores do RN: conversas com participantes, compositores e convidados para entrar no clima do evento."
+  },
+  "videos": []
 };

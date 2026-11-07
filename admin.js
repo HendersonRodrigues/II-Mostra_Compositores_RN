@@ -10,7 +10,11 @@ const CONFIG_FIELDS = [
   { path: "contactEmail", label: "E-mail de contato", type: "email" },
   { path: "contactPhone", label: "Telefone / WhatsApp", hint: "Com DDD. Ex.: (84) 9 8847 2021" },
   { path: "formUrl", label: "URL do Google Forms", hint: "Cole a URL de incorporação. Vazio exibe o aviso de formulário em breve.", type: "url" },
-  { path: "shareText", label: "Texto de compartilhamento (WhatsApp)", type: "textarea" }
+  { path: "shareText", label: "Texto de compartilhamento (WhatsApp)", type: "textarea" },
+  { path: "firebaseApiKey", label: "Firebase — API key", hint: "Configuração do app Web usada pelas curtidas dos vídeos." },
+  { path: "firebaseAuthDomain", label: "Firebase — Auth domain" },
+  { path: "firebaseProjectId", label: "Firebase — Project ID" },
+  { path: "firebaseAppId", label: "Firebase — App ID", hint: "Sem API key, Project ID e App ID, as curtidas ficam desativadas." }
 ];
 
 const CONTENT_GROUPS = [
@@ -156,6 +160,17 @@ const CONTENT_GROUPS = [
       { path: "footer.whatsapp", label: "Botão WhatsApp" },
       { path: "footer.copy", label: "Botão copiar link" }
     ]
+  },
+  {
+    title: "Bastidores",
+    fields: [
+      { path: "bastidores.eyebrow", label: "Sobretítulo" },
+      { path: "bastidores.heading", label: "Título da página" },
+      { path: "bastidores.lead", label: "Texto de apresentação", type: "textarea" },
+      { path: "bastidores.emptyTitle", label: "Estado vazio — título" },
+      { path: "bastidores.emptyText", label: "Estado vazio — texto", type: "textarea" },
+      { path: "bastidores.seoDescription", label: "Descrição para buscadores", type: "textarea" }
+    ]
   }
 ];
 
@@ -165,6 +180,7 @@ const statusElement = document.getElementById("status");
 const warning = document.getElementById("config-warning");
 const downloadButton = document.getElementById("download");
 const previewButton = document.getElementById("preview");
+const previewBastidoresButton = document.getElementById("preview-bastidores");
 const discardButton = document.getElementById("discard");
 
 let saveTimer;
@@ -189,16 +205,27 @@ function publishDraft(values) {
   }
 }
 
+function normalizeVideo(video) {
+  return {
+    url: String(video.url || ""),
+    title: String(video.title || ""),
+    guest: String(video.guest || ""),
+    description: String(video.description || "")
+  };
+}
+
 function baseValues() {
   const published = window.EVENT_SITE || {};
   const values = {
     config: { ...(published.config || {}) },
-    content: { ...(published.content || {}) }
+    content: { ...(published.content || {}) },
+    videos: Array.isArray(published.videos) ? published.videos.map(normalizeVideo) : []
   };
   const draft = readDraft();
   if (draft) {
     values.config = { ...values.config, ...(draft.config || {}) };
     values.content = { ...values.content, ...(draft.content || {}) };
+    if (Array.isArray(draft.videos)) values.videos = draft.videos.map(normalizeVideo);
   }
   return values;
 }
@@ -247,6 +274,182 @@ function createField(section, field, value) {
   return wrapper;
 }
 
+function youtubeId(input) {
+  if (!input) return "";
+  const value = String(input).trim();
+  if (/^[A-Za-z0-9_-]{11}$/.test(value)) return value;
+
+  let url;
+  try {
+    url = new URL(value);
+  } catch (error) {
+    return "";
+  }
+
+  const host = url.hostname.replace(/^www\./, "");
+  let id = "";
+
+  if (host === "youtu.be") {
+    id = url.pathname.split("/").filter(Boolean)[0] || "";
+  } else if (host.endsWith("youtube.com") || host.endsWith("youtube-nocookie.com")) {
+    if (url.pathname === "/watch") {
+      id = url.searchParams.get("v") || "";
+    } else {
+      const match = url.pathname.match(/^\/(?:embed|shorts|live|v)\/([^/?#]+)/);
+      if (match) id = match[1];
+    }
+  }
+
+  return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : "";
+}
+
+function collectVideos() {
+  return Array.from(form.querySelectorAll("[data-video-index]")).map((card) => ({
+    url: card.querySelector('[data-video-key="url"]').value.trim(),
+    title: card.querySelector('[data-video-key="title"]').value.trim(),
+    guest: card.querySelector('[data-video-key="guest"]').value.trim(),
+    description: card.querySelector('[data-video-key="description"]').value.trim()
+  }));
+}
+
+function createVideoInput(labelText, key, value, index, type, wide) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "field" + (wide ? " wide" : "");
+
+  const id = `video-${index}-${key}`;
+  const label = document.createElement("label");
+  label.setAttribute("for", id);
+  label.textContent = labelText;
+
+  const control = document.createElement(type === "textarea" ? "textarea" : "input");
+  control.id = id;
+  control.dataset.videoKey = key;
+  control.value = value;
+  if (type === "textarea") {
+    control.rows = 3;
+  } else {
+    control.type = "text";
+  }
+
+  wrapper.append(label, control);
+  return wrapper;
+}
+
+function renderVideos(videos) {
+  const existing = document.getElementById("videos-fieldset");
+  if (existing) existing.remove();
+
+  const fieldset = document.createElement("fieldset");
+  fieldset.id = "videos-fieldset";
+
+  const legend = document.createElement("legend");
+  legend.textContent = "Bastidores — vídeos";
+
+  const hint = document.createElement("p");
+  hint.className = "field-hint";
+  hint.textContent = "Os vídeos aparecem na ordem abaixo. URL e título são obrigatórios; convidado e descrição são opcionais.";
+
+  fieldset.append(legend, hint);
+
+  if (!videos.length) {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.className = "video-edit-empty";
+    emptyMessage.textContent = "Nenhum vídeo adicionado ainda.";
+    fieldset.append(emptyMessage);
+  }
+
+  videos.forEach((video, index) => {
+    const card = document.createElement("div");
+    card.className = "video-edit";
+    card.dataset.videoIndex = String(index);
+
+    const head = document.createElement("div");
+    head.className = "video-edit-head";
+
+    const number = document.createElement("span");
+    number.className = "video-edit-number";
+    number.textContent = `Vídeo ${index + 1}`;
+
+    const actions = document.createElement("div");
+    actions.className = "video-edit-actions";
+
+    const up = document.createElement("button");
+    up.type = "button";
+    up.className = "video-edit-btn";
+    up.dataset.videoAction = "up";
+    up.textContent = "↑";
+    up.setAttribute("aria-label", `Mover vídeo ${index + 1} para cima`);
+    up.disabled = index === 0;
+
+    const down = document.createElement("button");
+    down.type = "button";
+    down.className = "video-edit-btn";
+    down.dataset.videoAction = "down";
+    down.textContent = "↓";
+    down.setAttribute("aria-label", `Mover vídeo ${index + 1} para baixo`);
+    down.disabled = index === videos.length - 1;
+
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.className = "video-edit-btn danger";
+    remove.dataset.videoAction = "remove";
+    remove.textContent = "Remover";
+    remove.setAttribute("aria-label", `Remover vídeo ${index + 1}`);
+
+    actions.append(up, down, remove);
+    head.append(number, actions);
+
+    const grid = document.createElement("div");
+    grid.className = "fields";
+    grid.append(
+      createVideoInput("URL do YouTube", "url", video.url, index, "text", true),
+      createVideoInput("Título", "title", video.title, index, "text", false),
+      createVideoInput("Convidado (opcional)", "guest", video.guest, index, "text", false),
+      createVideoInput("Descrição (opcional)", "description", video.description, index, "textarea", true)
+    );
+
+    card.append(head, grid);
+    fieldset.append(card);
+  });
+
+  const addButton = document.createElement("button");
+  addButton.type = "button";
+  addButton.id = "add-video";
+  addButton.className = "admin-btn";
+  addButton.textContent = "+ Adicionar vídeo";
+  fieldset.append(addButton);
+
+  groupsContainer.append(fieldset);
+}
+
+function addVideo() {
+  const videos = collectVideos();
+  videos.push({ url: "", title: "", guest: "", description: "" });
+  renderVideos(videos);
+  const cards = form.querySelectorAll("[data-video-index]");
+  const lastCard = cards[cards.length - 1];
+  if (lastCard) lastCard.querySelector('[data-video-key="url"]').focus();
+  queueSave();
+}
+
+function removeVideo(index) {
+  const videos = collectVideos();
+  videos.splice(index, 1);
+  renderVideos(videos);
+  queueSave();
+}
+
+function moveVideo(index, direction) {
+  const videos = collectVideos();
+  const target = index + direction;
+  if (target < 0 || target >= videos.length) return;
+  [videos[index], videos[target]] = [videos[target], videos[index]];
+  renderVideos(videos);
+  const card = form.querySelector(`[data-video-index="${target}"]`);
+  if (card) card.querySelector('[data-video-key="url"]').focus();
+  queueSave();
+}
+
 function renderFields(values) {
   groupsContainer.replaceChildren();
 
@@ -275,10 +478,12 @@ function renderFields(values) {
     fieldset.append(grid);
     groupsContainer.append(fieldset);
   });
+
+  renderVideos(values.videos || []);
 }
 
 function collectValues() {
-  const values = { config: {}, content: {} };
+  const values = { config: {}, content: {}, videos: collectVideos() };
   form.querySelectorAll("[data-path]").forEach((control) => {
     values[control.dataset.section][control.dataset.path] = control.value;
   });
@@ -294,7 +499,7 @@ function queueSave() {
 }
 
 function buildFile(values) {
-  const data = { config: {}, content: {} };
+  const data = { config: {}, content: {}, videos: (values.videos || []).map(normalizeVideo) };
   CONFIG_FIELDS.forEach((field) => {
     data.config[field.path] = values.config[field.path] || "";
   });
@@ -319,6 +524,23 @@ function validDates(values) {
 
 downloadButton.addEventListener("click", () => {
   const values = collectValues();
+
+  const videos = values.videos
+    .filter((video) => video.url || video.title || video.guest || video.description)
+    .map(normalizeVideo);
+
+  for (let index = 0; index < videos.length; index++) {
+    if (!youtubeId(videos[index].url)) {
+      setStatus(`Vídeo ${index + 1}: informe uma URL válida do YouTube.`, "error");
+      return;
+    }
+    if (!videos[index].title) {
+      setStatus(`Vídeo ${index + 1}: informe um título.`, "error");
+      return;
+    }
+  }
+
+  values.videos = videos;
 
   if (!validDates(values)) {
     setStatus("Verifique as datas de início e término (formato ISO com fuso).", "error");
@@ -348,10 +570,41 @@ previewButton.addEventListener("click", () => {
   window.open("index.html?preview=1", "_blank", "noopener");
 });
 
+if (previewBastidoresButton) {
+  previewBastidoresButton.addEventListener("click", () => {
+    const values = collectValues();
+    if (!publishDraft(values)) {
+      setStatus("Não foi possível salvar o rascunho para pré-visualizar.", "error");
+      return;
+    }
+    window.open("bastidores.html?preview=1", "_blank", "noopener");
+  });
+}
+
 discardButton.addEventListener("click", () => {
   if (!window.confirm("Descartar o rascunho salvo neste navegador?")) return;
   localStorage.removeItem(DRAFT_KEY);
   location.reload();
+});
+
+form.addEventListener("click", (event) => {
+  if (event.target.closest("#add-video")) {
+    addVideo();
+    return;
+  }
+
+  const actionButton = event.target.closest("[data-video-action]");
+  if (!actionButton) return;
+
+  const card = actionButton.closest("[data-video-index]");
+  if (!card) return;
+
+  const index = Number(card.dataset.videoIndex);
+  const action = actionButton.dataset.videoAction;
+
+  if (action === "up") moveVideo(index, -1);
+  else if (action === "down") moveVideo(index, 1);
+  else if (action === "remove") removeVideo(index);
 });
 
 form.addEventListener("input", queueSave);

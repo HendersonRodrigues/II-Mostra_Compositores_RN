@@ -20,13 +20,14 @@
       <div class="header-actions">
         <span id="status" class="status" role="status" aria-live="polite"></span>
         <a class="btn-link" href="index.html" target="_blank" rel="noopener">Ver página publicada</a>
+        <a class="btn-link" href="bastidores.html" target="_blank" rel="noopener">Ver Bastidores</a>
       </div>
     </div>
   </header>
 
   <main class="admin-wrap">
     <section class="notice">
-      <strong>Como publicar:</strong> edite os campos, clique em <em>Baixar content.js</em> e substitua o arquivo <code>content.js</code> no repositório do GitHub. O rascunho fica salvo apenas neste navegador.
+      <strong>Como publicar:</strong> edite os campos e os vídeos, clique em <em>Baixar content.js</em> e substitua o arquivo <code>content.js</code> no repositório do GitHub. O rascunho fica salvo apenas neste navegador.
     </section>
 
     <section class="notice warn" id="config-warning" hidden>
@@ -39,12 +40,13 @@
 
     <div class="admin-actions">
       <button id="download" class="admin-btn primary" type="button">Baixar content.js</button>
-      <button id="preview" class="admin-btn" type="button">Salvar e pré-visualizar</button>
+      <button id="preview" class="admin-btn" type="button">Pré-visualizar site</button>
+      <button id="preview-bastidores" class="admin-btn" type="button">Pré-visualizar Bastidores</button>
       <button id="discard" class="admin-btn danger" type="button">Descartar rascunho</button>
     </div>
 
     <p class="admin-hint">
-      A pré-visualização abre <code>index.html?preview=1</code> com o rascunho deste navegador.
+      As pré-visualizações abrem <code>index.html?preview=1</code> e <code>bastidores.html?preview=1</code> com o rascunho deste navegador. As curtidas são gravadas no Firebase configurado acima.
       Visitantes continuam vendo o conteúdo publicado até você substituir o <code>content.js</code> no repositório.
     </p>
   </main>

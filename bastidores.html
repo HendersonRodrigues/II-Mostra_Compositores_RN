@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bastidores — II Mostra de Compositores do RN</title>
+  <meta name="description" content="Entrevistas e bastidores da II Mostra de Compositores do RN: conversas com participantes, compositores e convidados para entrar no clima do evento." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bastidores — II Mostra de Compositores do RN" />
+  <meta property="og:description" content="Entrevistas e bastidores da II Mostra de Compositores do RN. Novos vídeos serão publicados aos poucos." />
+  <meta property="og:locale" content="pt_BR" />
+  <meta name="theme-color" content="#0b1020" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234f46e5'/%3E%3Ctext x='50' y='70' font-family='Arial, sans-serif' font-size='54' font-weight='700' text-anchor='middle' fill='%23ffffff'%3E%E2%99%AA%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="bastidores.css" />
+  <script src="content.js" defer></script>
+  <script src="site.js" defer></script>
+  <script src="nav.js" defer></script>
+  <script src="bastidores.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Voltar ao início">
+        <span class="brand-mark" aria-hidden="true">♪</span>
+        <span class="brand-text">
+          <span data-field="brand.main">II Mostra de Compositores</span>
+          <small data-field="brand.sub">do RN · UERN</small>
+        </span>
+      </a>
+
+      <nav class="nav" id="menu-principal" aria-label="Navegação principal">
+        <a href="index.html">Início</a>
+        <a href="index.html#sobre">Sobre</a>
+        <a href="index.html#programacao">Programação</a>
+        <a href="index.html#local">Participar</a>
+        <a href="bastidores.html" aria-current="page">Bastidores</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+
+      <a class="btn btn-primary btn-sm" href="index.html#inscricao">Inscrever-se</a>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow" data-field="bastidores.eyebrow">Bastidores</p>
+        <h1 data-field="bastidores.heading">Bastidores da II Mostra</h1>
+        <p class="page-hero-lead" data-field="bastidores.lead">
+          Entrevistas com participantes, compositores e convidados para entrar no clima
+          do evento. Novos vídeos serão publicados aos poucos até a mostra.
+        </p>
+      </div>
+    </section>
+
+    <section class="section videos-section">
+      <div class="container">
+        <div class="video-list" id="video-list"></div>
+
+        <div class="video-empty" id="videos-empty">
+          <span class="video-empty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg>
+          </span>
+          <h2 data-field="bastidores.emptyTitle">Os primeiros vídeos estão a caminho</h2>
+          <p data-field="bastidores.emptyText">
+            Em breve, entrevistas com quem faz a II Mostra acontecer. Acompanhe por aqui.
+          </p>
+        </div>
+
+        <p class="likes-note" id="likes-note" role="status" aria-live="polite" hidden></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="index.html" aria-label="Voltar ao início">
+          <span class="brand-mark" aria-hidden="true">♪</span>
+          <span class="brand-text">
+            <span data-field="brand.main">II Mostra de Compositores</span>
+            <small data-field="brand.sub">do RN · UERN</small>
+          </span>
+        </a>
+        <p class="footer-text" data-field="footer.text">
+          Evento dedicado à música autoral produzida no Rio Grande do Norte, sediado na UERN.
+          Dúvidas? Fale com a organização.
+        </p>
+        <p class="footer-credit" data-field="footer.credit">Proposta e organização: Professor Dr. Henderson Rodrigues — UERN.</p>
+        <div class="footer-contact">
+          <a class="footer-mail" data-event="email-link" href="mailto:hendersonrodrigues@uern.br">
+            <span data-event="email">hendersonrodrigues@uern.br</span>
+          </a>
+          <a class="footer-mail" data-event="phone-link" href="https://wa.me/5584988472021">
+            <span data-event="phone">(84) 9 8847 2021</span> · WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-share">
+        <p class="footer-title">Navegação</p>
+        <nav class="footer-links" aria-label="Links do rodapé">
+          <a href="index.html">Início</a>
+          <a href="index.html#programacao">Programação</a>
+          <a href="index.html#inscricao">Inscrição</a>
+          <a href="index.html#faq">Dúvidas</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>© <span id="year">2026</span> <span data-event="event-name">II Mostra de Compositores do RN</span></p>
+      <nav aria-label="Links do rodapé">
+        <a href="index.html">Início</a>
+        <a href="index.html#programacao">Programação</a>
+        <a href="index.html#inscricao">Inscrição</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
