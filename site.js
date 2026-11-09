@@ -3,7 +3,7 @@ const DEFAULT_CONFIG = {
   startISO: "2026-11-25T16:00:00-03:00",
   endISO: "2026-11-27T18:30:00-03:00",
   timeZone: "America/Sao_Paulo",
-  location: "Auditório do Curso de Música, FALA (Sede 2) — Campus Central da UERN, Mossoró",
+  location: "Curso de Música, DART/FALA (Sede 2) — Campus Central da UERN, Mossoró",
   locationShort: "Híbrido · UERN",
   contactEmail: "hendersonrodrigues@uern.br",
   contactPhone: "(84) 9 8847 2021",
