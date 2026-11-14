@@ -258,6 +258,15 @@ section[id],
   font-weight: 600;
 }
 
+.nav a.nav-highlight {
+  color: #fbbf24;
+  font-weight: 600;
+}
+
+.nav a.nav-highlight:hover {
+  color: #fde68a;
+}
+
 .menu-toggle {
   display: none;
   align-items: center;
