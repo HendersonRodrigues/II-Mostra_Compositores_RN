@@ -103,5 +103,24 @@ window.EVENT_SITE = {
     "bastidores.emptyText": "Em breve, entrevistas com quem faz a II Mostra acontecer. Acompanhe por aqui.",
     "bastidores.seoDescription": "Entrevistas e bastidores da II Mostra de Compositores do RN: conversas com participantes, compositores e convidados para entrar no clima do evento."
   },
-  "videos": []
+  "videos": [
+    {
+      "url": "https://youtu.be/MNKElRr_c2c",
+      "title": "Conversa com prof. Ms. Carlos Batista",
+      "guest": "",
+      "description": "Nesse episódio do nosso podcast conversamos com o professor Carlos Batista que é um dos primeiros professores do DART. Licenciado em Educação Física (UERN), Bacharel em Música e Especialista em Metodologias do Ensino de Artes (UECE), Mestre em Educação (UERN), Doutorando em Música (UNIRIO). Professor do Curso de Música da UERN."
+    },
+    {
+      "url": "https://youtu.be/fPkCe6J1b4s",
+      "title": "Conversa com o compositor Breno Nauan",
+      "guest": "",
+      "description": "Nessa conversa falamos de tecnologia e composiçào musical com o Brenno. Brenno Nauan, 25 anos, é compositor, produtor musical, guitarrista, cantor e baixista, formado em Música pela UERN em 2025. Também tem forte vivência com o trombone."
+    },
+    {
+      "url": "https://youtu.be/WXLsf3ov_Bg",
+      "title": "Conversa com a educadora Alice Costa",
+      "guest": "",
+      "description": "Nesse episódio conversamos com Alice Costa, ex-aluna do curso de múscia do DART e focada em composiçào musical para educaçào infantil. Papo muito bom."
+    }
+  ]
 };
