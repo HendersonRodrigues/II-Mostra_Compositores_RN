@@ -87,7 +87,24 @@
   function initForm() {
     const iframe = $("#form-iframe");
     const placeholder = $("#form-placeholder");
+    const closed = $("#signup-closed");
+    const note = $("#form-note");
+    const lead = $("#signup-lead");
     if (!iframe || !placeholder) return;
+
+    const deadline = parseDate(CONFIG.signupDeadlineISO);
+    if (deadline && Date.now() > deadline.getTime()) {
+      placeholder.hidden = true;
+      iframe.hidden = true;
+      if (closed) closed.hidden = false;
+      if (note) note.hidden = true;
+      const closedLead = CONTENT["signup.closedLead"];
+      if (lead && closedLead) lead.textContent = closedLead;
+      return;
+    }
+
+    if (closed) closed.hidden = true;
+    if (note) note.hidden = false;
 
     if (!CONFIG.formUrl) {
       placeholder.hidden = false;

@@ -9,6 +9,7 @@ window.EVENT_SITE = {
     "contactEmail": "hendersonrodrigues@uern.br",
     "contactPhone": "(84) 9 8847 2021",
     "formUrl": "https://docs.google.com/forms/d/e/1FAIpQLSeiPPhEB4Fra8hBo8ovTNi5mmfDM2DyTaR-FAwsXhkbzr1OkA/viewform",
+    "signupDeadlineISO": "2026-11-23T23:59:59-03:00",
     "shareText": "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026.",
     "likesNamespace": "uern-ii-mostra-compositores-rn"
   },
@@ -34,7 +35,7 @@ window.EVENT_SITE = {
     "about.card1Title": "Composição coletiva",
     "about.card1Text": "Laboratório de criação conjunta no primeiro dia, aberto a compositores iniciantes e experientes.",
     "about.card2Title": "Minicursos",
-    "about.card2Text": "Momento de troca de conhecimento e crescimento técnico com dos minicursos programados: Tecnologias Composicionais, Composição na Academia e Composição na Educação Infantil. Abertos a todos!",
+    "about.card2Text": "Momento de troca de conhecimento e crescimento técnico com os minicursos programados: Tecnologias Composicionais, Composição na Academia e Composição na Educação Infantil. Abertos a todos!",
     "about.card3Title": "Difusão das obras",
     "about.card3Text": "Apresentação e compartilhamento das obras produzidas na mostra com momentos de conversas sobre as obras, em todos os dias do evento.",
     "schedule.eyebrow": "Programação",
@@ -81,6 +82,9 @@ window.EVENT_SITE = {
     "signup.placeholderTitle": "O formulário de inscrição será disponibilizado em breve.",
     "signup.placeholderText": "Enquanto isso, você pode entrar em contato pelo e-mail",
     "signup.note": "Ao se inscrever, você autoriza o uso dos seus dados exclusivamente para a organização deste evento.",
+    "signup.closedLead": "As inscrições para esta edição foram encerradas. Para dúvidas, fale com a organização.",
+    "signup.closedTitle": "Inscrições encerradas",
+    "signup.closedText": "O prazo de inscrição terminou em 23 de novembro de 2026. Em caso de dúvidas, entre em contato pelo e-mail:",
     "faq.eyebrow": "Dúvidas frequentes",
     "faq.heading": "Perguntas e respostas",
     "faq.q1": "Preciso ter experiência em composição?",
@@ -112,7 +116,7 @@ window.EVENT_SITE = {
     },
     {
       "url": "https://youtu.be/fPkCe6J1b4s",
-      "title": "Conversa com o compositor Breno Nauan",
+      "title": "Conversa com o compositor Brenno Nauan",
       "guest": "",
       "description": "Nessa conversa falamos de tecnologia e composiçào musical com o Brenno. Brenno Nauan, 25 anos, é compositor, produtor musical, guitarrista, cantor e baixista, formado em Música pela UERN em 2025. Também tem forte vivência com o trombone."
     },

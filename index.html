@@ -289,7 +289,7 @@
         <div class="section-head reveal">
           <p class="eyebrow" data-field="signup.eyebrow">Inscrição</p>
           <h2 data-field="signup.heading">Garanta sua vaga</h2>
-          <p class="section-lead" data-field="signup.lead">
+          <p class="section-lead" id="signup-lead" data-field="signup.lead">
             Preencha o formulário abaixo. A confirmação da sua inscrição e as
             informações de acesso serão enviadas por e-mail.
           </p>
@@ -300,6 +300,11 @@
             <p class="form-placeholder-title" data-field="signup.placeholderTitle">O formulário de inscrição será disponibilizado em breve.</p>
             <p><span data-field="signup.placeholderText">Enquanto isso, você pode entrar em contato pelo e-mail</span> <a data-event="email-link" href="mailto:hendersonrodrigues@gmail.com"><span data-event="email">hendersonrodrigues@gmail.com</span></a>.</p>
           </div>
+          <div id="signup-closed" class="form-placeholder" hidden>
+            <p class="form-placeholder-title" data-field="signup.closedTitle">Inscrições encerradas</p>
+            <p data-field="signup.closedText">O prazo de inscrição terminou em 23 de novembro de 2026. Em caso de dúvidas, entre em contato pelo e-mail:</p>
+            <p><a data-event="email-link" href="mailto:hendersonrodrigues@uern.br"><span data-event="email">hendersonrodrigues@uern.br</span></a></p>
+          </div>
           <iframe
             id="form-iframe"
             title="Formulário de inscrição na II Mostra de Compositores do RN"
@@ -307,7 +312,7 @@
             loading="lazy"
             hidden
           ></iframe>
-          <p class="form-note" data-field="signup.note">
+          <p class="form-note" id="form-note" data-field="signup.note">
             Ao se inscrever, você autoriza o uso dos seus dados exclusivamente para a
             organização deste evento.
           </p>

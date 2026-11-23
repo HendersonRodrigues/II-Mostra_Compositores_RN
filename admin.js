@@ -10,6 +10,7 @@ const CONFIG_FIELDS = [
   { path: "contactEmail", label: "E-mail de contato", type: "email" },
   { path: "contactPhone", label: "Telefone / WhatsApp", hint: "Com DDD. Ex.: (84) 9 8847 2021" },
   { path: "formUrl", label: "URL do Google Forms", hint: "Cole a URL de incorporação. Vazio exibe o aviso de formulário em breve.", type: "url" },
+  { path: "signupDeadlineISO", label: "Prazo de inscrição (ISO com fuso)", hint: "Depois dessa data, a página esconde o formulário. Ex.: 2026-11-23T23:59:59-03:00" },
   { path: "shareText", label: "Texto de compartilhamento (WhatsApp)", type: "textarea" },
   { path: "likesNamespace", label: "Namespace das curtidas (Abacus)", hint: "Use letras, números, hífen, ponto ou sublinhado. Troque se quiser começar a contagem do zero." }
 ];
@@ -130,7 +131,10 @@ const CONTENT_GROUPS = [
       { path: "signup.lead", label: "Texto de apresentação", type: "textarea" },
       { path: "signup.placeholderTitle", label: "Aviso de formulário em breve", type: "textarea" },
       { path: "signup.placeholderText", label: "Frase antes do e-mail" },
-      { path: "signup.note", label: "Aviso de privacidade", type: "textarea" }
+      { path: "signup.note", label: "Aviso de privacidade", type: "textarea" },
+      { path: "signup.closedLead", label: "Inscrições encerradas — chamada", type: "textarea" },
+      { path: "signup.closedTitle", label: "Inscrições encerradas — título" },
+      { path: "signup.closedText", label: "Inscrições encerradas — texto", type: "textarea" }
     ]
   },
   {
