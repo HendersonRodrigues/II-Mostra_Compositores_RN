@@ -8,7 +8,7 @@ const DEFAULT_CONFIG = {
   contactEmail: "hendersonrodrigues@uern.br",
   contactPhone: "(84) 9 8847 2021",
   formUrl: "https://docs.google.com/forms/d/e/1FAIpQLSeiPPhEB4Fra8hBo8ovTNi5mmfDM2DyTaR-FAwsXhkbzr1OkA/viewform",
-  signupDeadlineISO: "2026-11-23T23:59:59-03:00",
+  signupDeadlineISO: "2026-11-26T23:59:59-03:00",
   shareText: "Participe da II Mostra de Compositores do RN — 25 a 27 de novembro de 2026.",
   likesNamespace: "uern-ii-mostra-compositores-rn"
 };
